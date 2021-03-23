@@ -6,13 +6,14 @@ Sub Fill_Info()
     
     Range("A2").Select
     
-    CurrentDate = DateOffset
+    CurrentDate = Date
     
     Late2D = 0
     Upcoming4D = 0
     Late4D = 0
     Upcoming8D = 0
     Late8D = 0
+    OpenCount = 0
     
     For I = 1 To NumRows
         Sdate = Range("M" & I + 1)
@@ -21,6 +22,7 @@ Sub Fill_Info()
         
         'Filter empty CAR'
         If IsEmpty(Sdate) = False And CurrentStatus = "Open" Then
+            OpenCount = OpenCount + 1
             CreationDate = Range("M" & I + 1)
 
             Date2D = Range("AM" & I + 1)
@@ -28,6 +30,7 @@ Sub Fill_Info()
             Date8D = Range("AO" & I + 1)
 
             DateOffset = DateDiff("d", CreationDate, CurrentDate)
+            
             
             If IsEmpty(Date2D) Then
                 If DateOffset > 1 Then
@@ -62,6 +65,7 @@ Sub Fill_Info()
     Range("C5").Value = Late4D
     Range("C6").Value = Upcoming8D
     Range("C7").Value = Late8D
+    Range("C8").Value = OpenCount
     
     Range("F3").Value = Format(Now, "mm/dd/yyyy HH:mm:ss")
     

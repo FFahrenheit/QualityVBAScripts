@@ -39,7 +39,7 @@ Sub Send_Email()
         Set objEmail = objOutlook.CreateItem(olMailItem)
     
         With objEmail
-            .To = "i.lopez@mx.interplex.com"
+            .To = "i.lopez@mx.interplex.com;Martha.Rodriguez@mx.interplex.com"
             .Subject = "Estado Bitácora CAR"
             .HTMLBody = html
             .Send
