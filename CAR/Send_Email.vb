@@ -6,7 +6,7 @@ Sub Send_Email()
     LastUpdate = Range("F2")
     CurrentDate = Date
     
-    If IsEmpty(LastUpdate) Or DateDiff("d", LastUpdate, CurrentDate) >= 1 Then
+    If True Or IsEmpty(LastUpdate) Or DateDiff("d", LastUpdate, CurrentDate) >= 1 Then
         NumRows = Range("B3", Range("B3").End(xlDown)).Rows.Count
         
         Dim html
@@ -29,8 +29,17 @@ Sub Send_Email()
             html = html & "</tr>"
         Next
     
-        html = html & "</table></div></body></html>"
-    
+        html = html & "</table><br>Saludos</div></body></html>"
+        
+        NumRows = Range("J3", Range("J3").End(xlDown)).Rows.Count
+        Dim Recipients As String
+        
+        Recipients = "i.lopez@mx.interplex.com"
+        
+        For I = 1 To NumRows
+            Recipients = Recipients & ";" & Range("J" & I + 2)
+        Next
+        
         Dim objOutlook As Object
         Set objOutlook = CreateObject("Outlook.Application")
         
@@ -39,10 +48,10 @@ Sub Send_Email()
         Set objEmail = objOutlook.CreateItem(olMailItem)
     
         With objEmail
-            .To = "i.lopez@mx.interplex.com;Martha.Rodriguez@mx.interplex.com"
+            .To = Recipients
             .Subject = "Estado Bitácora CAR"
             .HTMLBody = html
-            .Send
+            .Display
         End With
         
         Set objEmail = Nothing:    Set objOutlook = Nothing
