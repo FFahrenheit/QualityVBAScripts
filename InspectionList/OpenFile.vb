@@ -1,4 +1,4 @@
-Sub GetingFile()
+Sub GettingFile()
     Dim SelectedFile As String
     
     With Application.FileDialog(msoFileDialogFilePicker)
@@ -7,12 +7,12 @@ Sub GetingFile()
         .AllowMultiSelect = False
         .Title = "Seleccionar el archivo generado"
         .Filters.Clear
-        .Filters.Add "Extensible Markup Language ", "*.xml"
+        .Filters.Add "Excel Worksheets", "*.xls; *.xlsx"
         .InitialFileName = "D:\"
         If .Show = -1 Then
         'ok'
             SelectedFile = .SelectedItems(1)
-            MsgBox (SelectedFile)
+            OpenWorkbook (SelectedFile)
         Else
         'cancel'
         End If
