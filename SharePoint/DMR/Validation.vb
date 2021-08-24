@@ -1,22 +1,28 @@
 Sub SaveAlert()
-    Range("Number").Select
-    
+    On Error GoTo DebugFunction
     Dim I As Integer
-    Length = Range("A2", Range("A2").End(xlDown)).Rows.Count
+    Length = Worksheets("Validation").Range("A2", Worksheets("Validation").Range("A2").End(xlDown)).Rows.Count
+    MsgBox Length
     
     For I = 2 To Length + 1
     
-        Reference = Range("Validation!A" & I)
+        Reference = Worksheets("Validation").Range("A" & I)
         Value = Range(Reference)
-        Content = "Por favor, " & Range("Validation!B" & I)
-        Title = Range("Validation!C" & I)
+        
+        Content = "Por favor, " & Worksheets("Validation").Range("B" & I)
+        Title = Worksheets("Validation").Range("C" & I)
         
         If Value = "" Then
             CallNotification Title, Content, Reference
-            Exit For
+            Exit Sub
         End If
         
     Next I
+    
+    MsgBox "Hola!!!"
+    Exit Sub
+DebugFunction:
+    MsgBox Reference
 End Sub
 
 Sub CallNotification(Title, Content, Cell)
@@ -27,7 +33,6 @@ Sub CallNotification(Title, Content, Cell)
     If Response = vbOK Then
         Range(Cell).Select
     End If
-    
 EndFunction:
 End Sub
 
