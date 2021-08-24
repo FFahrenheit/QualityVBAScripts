@@ -32,14 +32,37 @@ Sub SaveAlert()
     Risk = Range("riskLevel")
     
     Reasons = Range("noRiskReasons")
-    
     If Risk = "No" And Reasons = "" Then
         CallNotification "FALTA LLENAR RAZONES", "Por favor, llene la razón y acciones de porqué no hay riesgo", "noRiskReasons"
         Exit Sub
     End If
     
     If Risk = "Medio" Or Risk = "Alto" Then
-        'Validación del plan de acción
+        If Range("fiveWhy") = "" Then
+            CallNotification "FALTA LLENAR 5 POR QUÉ", "Por favor, llene al menos uno de los 5 por qué y siga el orden del diagrama", "fiveWhy"
+            Exit Sub
+        End If
+        
+        I = 21
+        Filled = False
+        
+        While I <= 25
+            Action = Worksheets("DMR Hoja 2").Range("A" & I)
+            Responsable = Worksheets("DMR Hoja 2").Range("G" & I)
+            If Action = "" Xor Responsable = "" Then
+                CallNotification "FALTA LLENAR PLAN DE ACCIÓN", "Por favor, llene todas las acciones que están incompletas", "action"
+                Exit Sub
+            ElseIf Action <> "" And Responsable <> "" Then
+                Filled = True
+            End If
+            I = I + 1
+        Wend
+        
+        If Filled = False Then
+            CallNotification "FALTA LLENAR PLAN DE ACCIÓN", "Por favor, describa al menos una acción para evitar el problema", "action"
+            Exit Sub
+        End If
+        
     End If
     
     MsgBox "Form valido"
