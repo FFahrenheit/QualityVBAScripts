@@ -19,6 +19,8 @@ Sub SaveAlert()
     
         Filename = "DMR-" & Format(Range("number"), "000#")
         
+        ThisWorkbook.IsSaved = True
+        
         ActiveWorkbook.SaveAs Filename:= _
         "https://interplexgroup.sharepoint.com/americas/imx/imx_qms/TEMPLATES/" & Filename & ".xlsm" _
         , FileFormat:=xlOpenXMLWorkbookMacroEnabled, Password:="", WriteResPassword:="", _

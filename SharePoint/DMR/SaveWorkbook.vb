@@ -1,16 +1,20 @@
+Public IsSaved As Boolean
+
 Private Sub Workbook_Open()
     TemplateName = "IXFC055_Formato_DMR.xlsm"
     If ThisWorkbook.Name = TemplateName Then
         Application.AutoRecover.Enabled = False
         ActiveWorkbook.AutoSaveOn = False
     End If
+    
+    ThisWorkbook.IsSaved = False
 End Sub
 
 Private Sub Workbook_BeforeSave(ByVal SaveAsUI As Boolean, Cancel As Boolean)
-    Call SetServerProperties
-    TemplateName = "IXFC055_Formato_DMR.xlsm"
-    If ThisWorkbook.Name = TemplateName Then
     
+    TemplateName = "IXFC055_Formato_DMR.xlsm"
+    If ThisWorkbook.Name = TemplateName And ThisWorkbook.IsSaved = False Then
+        'Cancel = True
         Response = MsgBox("Está a punto de hacer cambios en el FORMATO. ¿Está seguro" _
         & " de esto? Recuerde que para guardar un nuevo DMR debe de presionar el" _
         & " botón GUARDAR DMR EN SP", vbYesNoCancel + vbCritical, "GUARDAR EN PLATILLA")
@@ -23,4 +27,7 @@ Private Sub Workbook_BeforeSave(ByVal SaveAsUI As Boolean, Cancel As Boolean)
         End If
         
     End If
+    
+    Call SetServerProperties
+    ThisWorkbook.IsSaved = False
 End Sub
