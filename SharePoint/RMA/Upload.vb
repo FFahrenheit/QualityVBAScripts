@@ -15,9 +15,7 @@ Sub SaveRMA()
     Style = vbYesNo + vbExclamation + vbDefaultButton2
     
     Response = MsgBox(Message, Style, "SALVAR ARCHIVO")
-    
-    Exit Sub
-    
+        
     If Response = vbYes Then
     
         Filename = "RMA-" & Format(Range("number"), "000#")
