@@ -4,6 +4,7 @@ Sub SetServerProperties()
     
     For Each Prop In WB.ContentTypeProperties
         On Error Resume Next
+        'MsgBox Prop.Name
         Select Case Prop.Name
             Case "#DMR"
                 Prop.Value = Range("dmrNumber").Value
@@ -32,9 +33,16 @@ Sub SetServerProperties()
             Case "Riesgo_Repeticion"
                 Prop.Value = Range("riskLevel").Value
             Case "Lider_Linea"
-                Prop.Value = Range("lineLeader").Value
+                Prop.Value = Range("lineaLeader").Value
             Case "Muestra"
                 Prop.Value = Range("lot").Value
+            Case "Numero_ID"
+                'MsgBox "Es el ID!!"
+                If Range("number").Value = "" Then
+                    Prop.Value = "9999"
+                Else
+                    Prop.Value = Range("number").Value
+                End If
             Case Else
                 'N/A
         End Select
