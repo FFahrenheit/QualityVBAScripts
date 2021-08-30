@@ -31,7 +31,11 @@ Sub SetServerProperties()
             Case "#RMA"
                 Prop.Value = Range("rmaName").Value
             Case "#ID"
-                Prop.Value = Range("number").Value
+                Prop.Value = Format(Range("number"), "000#")
+            Case "Comentarios"
+                Prop.Value = Range("comments").Value
+            Case "Numero_ID"
+                Prop.Value = Format(Range("number"), "000#")
             Case Else
                 'N/A
         End Select
