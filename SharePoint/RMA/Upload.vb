@@ -27,6 +27,9 @@ Sub SaveRMA()
         , FileFormat:=xlOpenXMLWorkbookMacroEnabled, Password:="", WriteResPassword:="", _
         ReadOnlyRecommended:=False, CreateBackup:=False
         
+        ActiveSheet.Shapes.Range(Array("uploadButton")).Select
+        Selection.Delete
+        Range("A1").Select
 
         Msg = "El RMA ha sido guardado con éxito"
         Style = vbOKOnly + vbInformation

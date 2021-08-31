@@ -26,6 +26,9 @@ Sub SaveAlert()
         , FileFormat:=xlOpenXMLWorkbookMacroEnabled, Password:="", WriteResPassword:="", _
         ReadOnlyRecommended:=False, CreateBackup:=False
         
+        ActiveSheet.Shapes.Range(Array("uploadButton")).Select
+        Selection.Delete
+        Range("A1").Select
 
         Msg = "El DMR ha sido guardado con éxito"
         Style = vbOKOnly + vbInformation
