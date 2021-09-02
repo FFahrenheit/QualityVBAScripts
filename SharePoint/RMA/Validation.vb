@@ -17,6 +17,11 @@ Function Validate() As Boolean
             'Exit For
         End If
     Next I
+
+    If Range("disposition") = "Scrap" And Range("scrap") = "" Then
+        CallNotification "FALTA LLENADO", "Por favor, seleccione donde se hará el Scrap", "scrap"
+        Exit Function
+    End If
     
     Validate = True
     Exit Function

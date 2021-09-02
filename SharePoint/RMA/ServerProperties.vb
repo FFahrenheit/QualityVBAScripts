@@ -40,6 +40,8 @@ Sub SetServerProperties()
                 Prop.Value = Str(Format(Range("number"), "000#"))
             Case "Scrap"
                 Prop.Value = Range("scrap").Value
+            Case "PO_Return"
+                Prop.Value = Range("poreturn").Value
             Case Else
                 'N/A
         End Select
