@@ -1,4 +1,6 @@
 Sub SetServerProperties()
+
+    'MsgBox Format(Range("number"), "000#")
     Dim WB As Workbook
     Set WB = ThisWorkbook
     
@@ -31,13 +33,16 @@ Sub SetServerProperties()
             Case "#RMA"
                 Prop.Value = Range("rmaName").Value
             Case "#ID"
-                Prop.Value = Format(Range("number"), "000#")
+                Prop.Value = Str(Format(Range("number"), "000#"))
             Case "Comentarios"
                 Prop.Value = Range("comments").Value
             Case "Numero_ID"
-                Prop.Value = Format(Range("number"), "000#")
+                Prop.Value = Str(Format(Range("number"), "000#"))
+            Case "Scrap"
+                Prop.Value = Range("scrap").Value
             Case Else
                 'N/A
         End Select
     Next Prop
+    
 End Sub
