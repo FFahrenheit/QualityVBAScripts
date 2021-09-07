@@ -36,6 +36,12 @@ Sub SetServerProperties()
                 Prop.Value = Range("lineaLeader").Value
             Case "Muestra"
                 Prop.Value = Range("lot").Value
+            Case "Informado_Planeacion"
+                Prop.Value = Range("planning").Value
+            Case "Informado_Produccion"
+                Prop.Value = Range("production").Value
+            Case "Informado_Almacen"
+                Prop.Value = Range("warehouse").Value
             Case "Numero_ID"
                 'MsgBox "Es el ID!!"
                 If Range("number").Value = "" Then

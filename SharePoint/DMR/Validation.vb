@@ -1,3 +1,4 @@
+
 Function Validate() As Boolean
     Validate = False
     On Error GoTo DebugFunction
@@ -11,7 +12,7 @@ Function Validate() As Boolean
         Content = "Por favor, " & Worksheets("Validation").Range("B" & I)
         Title = Worksheets("Validation").Range("C" & I)
         
-        If Value = "" Then
+        If Value = "" Or (Value = "9999" And Reference = "Number") Then
             CallNotification Title, Content, Reference
             Exit Function
             'Exit For
@@ -25,10 +26,10 @@ Function Validate() As Boolean
         Exit Function
     End If
     
-    If Not (Range("production") Or Range("warehouse") Or Range("planning")) Then
-        CallNotification "FALTA AVISAR MOVIMIENTO DE MATERIALES", "Por favor, indique al menos a un área que se avisó del movimiento de materiales", "production"
-        Exit Function
-    End If
+    'If Not (Range("production") Or Range("warehouse") Or Range("planning")) Then
+        'CallNotification "FALTA AVISAR MOVIMIENTO DE MATERIALES", "Por favor, indique al menos a un área que se avisó del movimiento de materiales", "production"
+        'Exit Function
+   'End If
     
     Risk = Range("riskLevel")
     
@@ -39,10 +40,11 @@ Function Validate() As Boolean
     End If
     
     If Risk = "Medio" Or Risk = "Alto" Then
-        If Range("fiveWhy") = "" Then
-            CallNotification "FALTA LLENAR 5 POR QUÉ", "Por favor, llene al menos uno de los 5 por qué y siga el orden del diagrama de la hoja 2", "fiveWhy"
-            Exit Function
-        End If
+        'Ishikawa
+        'If Range("fiveWhy") = "" Then
+            'CallNotification "FALTA LLENAR 5 POR QUÉ", "Por favor, llene al menos uno de los 5 por qué y siga el orden del diagrama de la hoja 2", "fiveWhy"
+            'Exit Function
+        'End If
         
         I = 21
         Filled = False
@@ -71,16 +73,3 @@ Function Validate() As Boolean
 DebugFunction:
     MsgBox "Error: " & Err.Description
 End Function
-
-Sub CallNotification(Title, Content, Cell)
-    On Error GoTo EndFunction
-    Style = vbOKOnly + vbCritical
-    Response = MsgBox(Content, Style, Title)
-    
-    If Response = vbOK Then
-        Range(Cell).Select
-    End If
-    
-EndFunction:
-End Sub
-
