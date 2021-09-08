@@ -32,6 +32,8 @@ Sub SaveAlert()
         Range("A1").Select
         
         Worksheets("DMR Hoja 2").Activate
+        ActiveSheet.Shapes.Range(Array("uploadButton2")).Select
+        Selection.Delete
         ActiveSheet.Shapes.Range(Array("newAction")).Select
         Selection.Delete
         Range("A1").Select

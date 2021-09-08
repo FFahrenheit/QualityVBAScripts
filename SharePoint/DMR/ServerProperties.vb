@@ -38,8 +38,16 @@ Sub SetServerProperties()
                 Prop.Value = Range("production").Value
             Case "Informado_Almacen"
                 Prop.Value = Range("warehouse").Value
+            Case "Acciones_Totales"
+                Prop.Value = Range("totalActions").Value
+            Case "Acciones_Completas"
+                Prop.Value = Range("completedActions").Value
+            Case "Progreso_Acciones"
+                Prop.Value = Range("progress").Value
+            Case "Hora_Creado"
+                'MsgBox Range("time").Text
+                Prop.Value = Range("time").Text
             Case "Numero_ID"
-                'MsgBox "Es el ID!!"
                 If Range("number").Value = "" Then
                     Prop.Value = "9999"
                 Else
