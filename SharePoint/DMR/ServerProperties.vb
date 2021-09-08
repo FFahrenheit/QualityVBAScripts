@@ -30,10 +30,6 @@ Sub SetServerProperties()
                 Prop.Value = Range("validator").Value
             Case "Numero_Orden"
                 Prop.Value = Range("orderNumber").Value
-            'Case "Riesgo_Repeticion"
-                'Prop.Value = Range("riskLevel").Value
-            Case "Lider_Linea"
-                Prop.Value = Range("lineaLeader").Value
             Case "Muestra"
                 Prop.Value = Range("lot").Value
             Case "Informado_Planeacion"

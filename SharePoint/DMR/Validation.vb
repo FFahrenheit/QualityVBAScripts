@@ -31,13 +31,15 @@ Function Validate() As Boolean
         Action = Worksheets("DMR Hoja 2").Range("A" & I)
         Responsable = Worksheets("DMR Hoja 2").Range("G" & I)
         If Action = "" Or Responsable = "" Then
-            CallNotification "FALTA LLENAR PLAN DE ACCIÓN", "Por favor, llene todas las acciones que están incompletas en la hoja 2", "action"
+            CallNotification "FALTA LLENAR PLAN DE ACCIÓN", "Por favor, llene todas las acciones que están incompletas en la hoja 2. Si no se usa la fila, elimínela", "action"
             Exit Function
+        End If
         I = I + 1
     Wend
     
     If I = 21 Then
         CallNotification "FALTA LLENAR PLAN DE ACCIÓN", "Por favor, llene al menos una accion a tomar en la hoja 2", "action"
+        Exit Function
     End If
     
     

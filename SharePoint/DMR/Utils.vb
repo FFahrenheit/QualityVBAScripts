@@ -1,4 +1,3 @@
-
 Sub CallNotification(Title, Content, Cell)
     On Error GoTo EndFunction
     Style = vbOKOnly + vbCritical
@@ -11,7 +10,6 @@ Sub CallNotification(Title, Content, Cell)
 EndFunction:
 End Sub
 
-'Recorded macro!
 Sub AddAction()
     Rows("22:22").Select
     Selection.Insert Shift:=xlDown, CopyOrigin:=xlFormatFromLeftOrAbove

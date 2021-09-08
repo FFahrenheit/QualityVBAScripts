@@ -7,7 +7,7 @@ Sub SaveAlert()
         Exit Sub
     End If
     
-    Message = "El DMR será guardado en el SharePoint de QMS en la libreria de <libreria>.  " _
+    Message = "El DMR será guardado en el SharePoint de QMS en la libreria de IMX_DMR.  " _
         & " Aqui podra consultarla para posterior revisión y/o edición." _
         & "¿Desea continuar?"
     
@@ -22,7 +22,7 @@ Sub SaveAlert()
         ThisWorkbook.IsSaved = True
         
         ActiveWorkbook.SaveAs Filename:= _
-        "https://interplexgroup.sharepoint.com/americas/imx/imx_qms/TEMPLATES/" & Filename & ".xlsm" _
+        "https://interplexgroup.sharepoint.com/americas/imx/imx_qms/IMX_DMR/" & Filename & ".xlsm" _
         , FileFormat:=xlOpenXMLWorkbookMacroEnabled, Password:="", WriteResPassword:="", _
         ReadOnlyRecommended:=False, CreateBackup:=False
         
