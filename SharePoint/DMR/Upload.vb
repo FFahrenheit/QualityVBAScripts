@@ -26,15 +26,17 @@ Sub SaveAlert()
         , FileFormat:=xlOpenXMLWorkbookMacroEnabled, Password:="", WriteResPassword:="", _
         ReadOnlyRecommended:=False, CreateBackup:=False
         
+        Worksheets("DMR Hoja 1").Activate
         ActiveSheet.Shapes.Range(Array("uploadButton")).Select
-        
         Selection.Delete
         Range("A1").Select
         
+        Worksheets("DMR Hoja 2").Activate
         ActiveSheet.Shapes.Range(Array("newAction")).Select
-        
         Selection.Delete
         Range("A1").Select
+        
+        Worksheets("DMR Hoja 1").Activate
         
         Msg = "El DMR ha sido guardado con éxito"
         Style = vbOKOnly + vbInformation
