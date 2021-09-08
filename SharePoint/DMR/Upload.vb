@@ -27,9 +27,15 @@ Sub SaveAlert()
         ReadOnlyRecommended:=False, CreateBackup:=False
         
         ActiveSheet.Shapes.Range(Array("uploadButton")).Select
+        
         Selection.Delete
         Range("A1").Select
-
+        
+        ActiveSheet.Shapes.Range(Array("newAction")).Select
+        
+        Selection.Delete
+        Range("A1").Select
+        
         Msg = "El DMR ha sido guardado con éxito"
         Style = vbOKOnly + vbInformation
         

@@ -1,4 +1,3 @@
-
 Function Validate() As Boolean
     Validate = False
     On Error GoTo DebugFunction
@@ -26,47 +25,21 @@ Function Validate() As Boolean
         Exit Function
     End If
     
-    'If Not (Range("production") Or Range("warehouse") Or Range("planning")) Then
-        'CallNotification "FALTA AVISAR MOVIMIENTO DE MATERIALES", "Por favor, indique al menos a un área que se avisó del movimiento de materiales", "production"
-        'Exit Function
-   'End If
+    I = 21
     
-    Risk = Range("riskLevel")
-    
-    Reasons = Range("noRiskReasons")
-    If Risk = "No" And Reasons = "" Then
-        CallNotification "FALTA LLENAR RAZONES", "Por favor, llene la razón y acciones de porqué no hay riesgo", "noRiskReasons"
-        Exit Function
-    End If
-    
-    If Risk = "Medio" Or Risk = "Alto" Then
-        'Ishikawa
-        'If Range("fiveWhy") = "" Then
-            'CallNotification "FALTA LLENAR 5 POR QUÉ", "Por favor, llene al menos uno de los 5 por qué y siga el orden del diagrama de la hoja 2", "fiveWhy"
-            'Exit Function
-        'End If
-        
-        I = 21
-        Filled = False
-        
-        While I <= 25
-            Action = Worksheets("DMR Hoja 2").Range("A" & I)
-            Responsable = Worksheets("DMR Hoja 2").Range("G" & I)
-            If Action = "" Xor Responsable = "" Then
-                CallNotification "FALTA LLENAR PLAN DE ACCIÓN", "Por favor, llene todas las acciones que están incompletas en la hoja 2", "action"
-                Exit Function
-            ElseIf Action <> "" And Responsable <> "" Then
-                Filled = True
-            End If
-            I = I + 1
-        Wend
-        
-        If Filled = False Then
-            CallNotification "FALTA LLENAR PLAN DE ACCIÓN", "Por favor, describa al menos una acción para evitar el problema en la hoja 2", "action"
+    While Worksheets("DMR Hoja 2").Range("A" & I).Value <> Range("endActions").Value
+        Action = Worksheets("DMR Hoja 2").Range("A" & I)
+        Responsable = Worksheets("DMR Hoja 2").Range("G" & I)
+        If Action = "" Or Responsable = "" Then
+            CallNotification "FALTA LLENAR PLAN DE ACCIÓN", "Por favor, llene todas las acciones que están incompletas en la hoja 2", "action"
             Exit Function
-        End If
-        
+        I = I + 1
+    Wend
+    
+    If I = 21 Then
+        CallNotification "FALTA LLENAR PLAN DE ACCIÓN", "Por favor, llene al menos una accion a tomar en la hoja 2", "action"
     End If
+    
     
     Validate = True
     Exit Function
