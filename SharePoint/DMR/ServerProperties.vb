@@ -3,9 +3,9 @@ Sub SetServerProperties()
     Set WB = ThisWorkbook
     
     For Each Prop In WB.ContentTypeProperties
-        On Error Resume Next
-        'MsgBox Prop.Name
-        Select Case Prop.Name
+        On Error GoTo Fault 'Resume Next
+        Name = Prop.Name
+        Select Case Name
             Case "#DMR"
                 Prop.Value = Range("dmrNumber").Value
             Case "Cliente"
@@ -40,13 +40,22 @@ Sub SetServerProperties()
                 Prop.Value = Range("warehouse").Value
             Case "Acciones_Totales"
                 Prop.Value = Range("totalActions").Value
-            Case "Acciones_Completas"
+            Case "Acciones_Hechas"
                 Prop.Value = Range("completedActions").Value
             Case "Progreso_Acciones"
                 Prop.Value = Range("progress").Value
-            Case "Hora_Creado"
-                'MsgBox Range("time").Text
-                Prop.Value = Range("time").Text
+            Case "Turno_Creado"
+                Prop.Value = Range("shift").Value
+            Case "Ultima_Accion"
+                Prop.Value = Range("lastAction").Value
+            Case "Acciones_Completas"
+                Prop.Value = Range("actionsCompleted").Value
+            Case "Acciones_Disponibles"
+                Prop.Value = Range("actionsAvailable").Value
+            Case "5Porque_Disponible"
+                Prop.Value = Range("whyAvailable").Value
+            Case "Problema_Identificado"
+                Prop.Value = Range("problem").Value
             Case "Numero_ID"
                 If Range("number").Value = "" Then
                     Prop.Value = "9999"
@@ -57,4 +66,7 @@ Sub SetServerProperties()
                 'N/A
         End Select
     Next Prop
+    Exit Sub
+Fault:
+    MsgBox Name
 End Sub

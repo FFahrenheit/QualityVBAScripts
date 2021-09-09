@@ -23,5 +23,4 @@ Sub AddAction()
     Range("A22:F22").Select
     ActiveCell.FormulaR1C1 = ""
     Range("A22:F22").Select
-    
 End Sub
