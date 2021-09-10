@@ -1,12 +1,14 @@
 Public IsSaved As Boolean
 
 Private Sub Workbook_Open()
+    On Error GoTo Error
     TemplateName = "IXFC055_Formato_DMR.xlsm"
     If ThisWorkbook.Name = TemplateName Then
         Application.AutoRecover.Enabled = False
         ActiveWorkbook.AutoSaveOn = False
     End If
     
+Error:
     ThisWorkbook.IsSaved = False
 End Sub
 
