@@ -2,7 +2,7 @@ Sub SaveAlert()
     On Error GoTo Fault
     Result = Validate()
     'MsgBox "Result = " & Result
-    
+
     If Result = False Then
         Exit Sub
     End If
@@ -31,12 +31,12 @@ Sub SaveAlert()
         Selection.Delete
         Range("A1").Select
         
-        Worksheets("DMR Hoja 2").Activate
-        ActiveSheet.Shapes.Range(Array("uploadButton2")).Select
-        Selection.Delete
-        'ActiveSheet.Shapes.Range(Array("newAction")).Select
-        'Selection.Delete
-        'Range("A1").Select
+'        Worksheets("DMR Hoja 2").Activate
+'        ActiveSheet.Shapes.Range(Array("uploadButton2")).Select
+'        Selection.Delete
+'        ActiveSheet.Shapes.Range(Array("newAction")).Select
+'        Selection.Delete
+'        Range("A1").Select
         
         Worksheets("DMR Hoja 1").Activate
         
@@ -56,6 +56,6 @@ Fault:
         & "los guiones bajos ( _ ) SI pueden ser utilizados" & Chr(10) & Chr(10) & "En caso contrario por favor " _
         & "informe al administrador del sharepoint sobre el problema"
     Style = vbOKOnly + vbInformation
-    
+
     MsgBox Msg, Style, "ERROR AL GUARDAR"
 End Sub
