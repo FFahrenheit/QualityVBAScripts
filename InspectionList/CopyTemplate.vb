@@ -14,9 +14,7 @@ Sub CopyTemplate(Filename As String)
             Set ws = .Sheets.Add(After:=.Sheets(.Sheets.Count))
             ws.Name = C
         End With
-    End If
-    
-    
+    End If    
     
     Dim Destino As Worksheet
     Dim Dict As Worksheet
@@ -32,7 +30,8 @@ Sub CopyTemplate(Filename As String)
     
     Set Destino = Workbooks(Y).Worksheets(Z)
     Set Dict = Workbooks(A).Worksheets(C)
-        
+    Dict.Columns(1).ClearContents
+    
     'Header details
     Dict.Range("A1") = "Pieza"
     Dict.Range("A2") = "Fecha"

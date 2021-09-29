@@ -36,6 +36,8 @@ Sub OpenWorkbook(Filename As String)
     Set Destino = Workbooks(Y).Worksheets(Z)
     'Set Dict = Workbooks(A).Worksheets(C)
     
+    Origen.Columns(1).ClearContents
+    Origen.Columns(2).ClearContents
     
     'Header details
     Origen.Range("A1") = "Pieza"
