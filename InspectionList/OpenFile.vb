@@ -1,8 +1,8 @@
-Sub GettingFile()
-    Dim SelectedFile As String
-    
-    With Application.FileDialog(msoFileDialogFilePicker)
-        
+Function GetFile() As String 
+    Dim SeletedFile As String
+    SelectedFile = ""
+
+    With Application.FileDialog(msoFileDialogFilePicker)        
         .ButtonName = "Confirm"
         .AllowMultiSelect = False
         .Title = "Seleccionar el archivo generado"
@@ -10,13 +10,28 @@ Sub GettingFile()
         .Filters.Add "Excel Worksheets", "*.xls; *.xlsx; *.xlsm"
         .InitialFileName = "D:\"
         If .Show = -1 Then
-        'ok'
+        'ok
             SelectedFile = .SelectedItems(1)
-            OpenWorkbook (SelectedFile)
+            GetFile = SelectedFile
+            ' OpenWorkbook (SelectedFile)
         Else
-        'cancel'
+        'cancel
             MsgBox "No se pudieron cargar los datos de la hoja de inspeccion", vbOKOnly + vbCritical, "Error de carga"
         End If
         
     End With
+End Function
+
+Sub GettingFile()
+    Filename = GetFile()
+    If Filename <> "" Then
+        OpenWorkbook (SelectedFile)
+    End If 
+End Sub
+
+Sub LoadTemplate()
+    Filename = GetFile()
+    If Filename <> "" Then
+        CopyTemplate (Filename)
+    End If 
 End Sub
