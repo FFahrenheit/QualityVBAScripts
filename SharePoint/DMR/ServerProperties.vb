@@ -1,6 +1,7 @@
 Sub SetServerProperties()
     Dim WB As Workbook
-    Set WB = ThisWorkbook
+    Set WB = ActiveWorkbook
+    I = 0
     
     For Each Prop In WB.ContentTypeProperties
         On Error GoTo Fault 'Resume Next
@@ -13,6 +14,8 @@ Sub SetServerProperties()
             Case "IMX_PN"
                 Prop.Value = Range("partNumber").Value
             Case "Fecha_Creado"
+                'MsgBox "reached!"
+                'MsgBox Range("date").Value
                 Prop.Value = Range("date").Value
             Case "Defecto"
                 Prop.Value = Range("defective").Value
@@ -65,8 +68,13 @@ Sub SetServerProperties()
             Case Else
                 'N/A
         End Select
+        I = I + 1
     Next Prop
+    'MsgBox "done!"
     Exit Sub
 Fault:
-    MsgBox Name
+    'MsgBox Err.Description
+    'MsgBox "Error saving property " & Name & "(" & I & ")"
+    MsgBox "Verifique la propiedad " & Name, vbOKOnly + vbCritical, "Error de propiedad"
+    Resume Next
 End Sub
