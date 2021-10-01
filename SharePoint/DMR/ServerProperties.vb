@@ -73,8 +73,15 @@ Sub SetServerProperties()
     'MsgBox "done!"
     Exit Sub
 Fault:
-    'MsgBox Err.Description
-    'MsgBox "Error saving property " & Name & "(" & I & ")"
-    MsgBox "Verifique la propiedad " & Name, vbOKOnly + vbCritical, "Error de propiedad"
+    Select Case Name
+        Case "Fecha_Creado"
+            Message = "Fecha de creado en informato incorrecto. Por favor, use " _
+            & "el formato mes-dia-año (mm-dd-aa)"
+        Case Else
+            Message = "Error al guardar la propiedad " & Name _
+            & ". Verifique su contenido"
+            MsgBox Err.Description, vbOKOnly + vbInformation, "Developer info"
+    End Select
+    MsgBox Message, vbOKOnly + vbCritical, "ERROR EN PROPIEDAD (" & I & ")"
     Resume Next
 End Sub
