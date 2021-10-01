@@ -4,31 +4,6 @@
 '  the inspection list automatically
 '  v.0.0.1
 
-'' This functions opens a file explorer dialog and
-'' return the string of the path to the file (excel files)
-Function GetFile() As String
-    Dim SeletedFile As String
-    SelectedFile = ""
-
-    With Application.FileDialog(msoFileDialogFilePicker)
-        .ButtonName = "Confirm"
-        .AllowMultiSelect = False
-        .Title = "Seleccionar el archivo generado"
-        .Filters.Clear
-        .Filters.Add "Excel Worksheets", "*.xls; *.xlsx; *.xlsm"
-        .InitialFileName = "D:\"
-        If .Show = -1 Then
-        'ok
-            SelectedFile = .SelectedItems(1)
-            GetFile = SelectedFile
-            ' OpenWorkbook (SelectedFile)
-        Else
-        'cancel
-            MsgBox "No se pudieron cargar los datos de la hoja de inspeccion", vbOKOnly + vbCritical, "Error de carga"
-        End If
-        
-    End With
-End Function
 
 '' This subroutine gets the template file and calls the function to process it
 Sub LoadTemplate()
@@ -37,7 +12,7 @@ Sub LoadTemplate()
     Response = MsgBox(Message, vbYesNo + vbQuestion + vbDefaultButton1, "CAMBIAR PLANTLLA")
     
     If Response = vbYes Then
-        Filename = GetFile()
+        Filename = Utils.GetFile()
         If Filename <> "" Then
             CopyTemplate (Filename)
         End If
@@ -52,7 +27,7 @@ Sub CopyTemplate(Filename As String)
     A = ActiveWorkbook.Name  'Workbook destino
     C = "Diccionario"
     
-    Exists = SheetExists(C, A)
+    Exists = Utils.SheetExists(C, A)
     If Exists = False Then
         'No existe, la creamos
         With Workbooks(A)
@@ -112,6 +87,7 @@ Sub CopyTemplate(Filename As String)
         Sheets("PLAN DE ACCION NUEVO").Visible = True
         Sheets("HOME").Visible = True
         Sheets("Nuevo analisis").Visible = False
+
         Sheets("Usuarios").Visible = False
         Sheets("Correo").Visible = False
         Sheets("Nombres").Visible = False
@@ -126,7 +102,6 @@ Sub CopyTemplate(Filename As String)
     Sheets("Diccionario").Unprotect ("Calidad2020")
     Sheets("Hoja de inspeccion").Visible = True
     Sheets("Diccionario").Visible = True
-
     ActiveWindow.DisplayHeadings = True
     ActiveWindow.DisplayWorkbookTabs = True
     Dict.Activate
@@ -137,23 +112,4 @@ ErrHandler:
     MsgBox "No se pudo cargar la plantilla de la hoja de inspeccion", vbOKOnly + vbCritical, "Error de carga"
     Exit Sub
 End Sub
-
-
-' Check if sheet exists
-Function SheetExists(sheetToFind As String, Optional WB As String) As Boolean
-    If WB = "" Then
-        Set InWorkbook = ThisWorkbook
-    Else
-        Set InWorkbook = Workbooks(WB)
-    End If
-
-    Dim Sheet As Object
-    For Each Sheet In InWorkbook.Sheets
-        If sheetToFind = Sheet.Name Then
-            SheetExists = True
-            Exit Function
-        End If
-    Next Sheet
-    SheetExists = False
-End Function
 
