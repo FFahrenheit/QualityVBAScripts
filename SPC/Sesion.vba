@@ -42,6 +42,7 @@ Sub CerrarSesion()
     Application.DisplayFormulaBar = False
     Application.DisplayStatusBar = False
 Handler:
+    Resume Next
 End Sub
 
 Sub IniciarSesion()
@@ -82,8 +83,12 @@ Sub IniciarSesion()
             
             For Each Worksheet In ActiveWorkbook.Worksheets
                 Worksheet.Unprotect ("Calidad2020")
-                'Worksheet.Visible = True
+                Worksheet.Visible = True
             Next Worksheet
+            
+            Worksheets("PLAN DE ACCION").Visible = False
+            Worksheets("Nombres").Visible = False
+            Worksheets("Analisis").Visible = False
         
             Sheets(Array("HOME", "Hoja de inspeccion", "SPC", "Nuevo analisis", _
             "PLAN DE ACCION NUEVO", "Usuarios", "Correo")).Select
