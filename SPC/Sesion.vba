@@ -1,4 +1,5 @@
 Sub CerrarSesion()
+    On Error GoTo Handler
     Application.ScreenUpdating = False
     Application.DisplayAlerts = False
 
@@ -40,6 +41,7 @@ Sub CerrarSesion()
     ' Application.ExecuteExcel4Macro "SHOW.TOOLBAR(""Ribbon"",False)"
     Application.DisplayFormulaBar = False
     Application.DisplayStatusBar = False
+Handler:
 End Sub
 
 Sub IniciarSesion()
@@ -99,6 +101,4 @@ Sub IniciarSesion()
     Application.ScreenUpdating = True
     Application.DisplayAlerts = True
 End Sub
-
- 
 

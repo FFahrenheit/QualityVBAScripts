@@ -113,3 +113,27 @@ ErrHandler:
     Exit Sub
 End Sub
 
+Sub EndTemplate()
+    If Sheets("Usuarios").ProtectContents = True Then
+        ' Sheets("Hoja de inspeccion").Unprotect ("Calidad2020")
+        Sheets("Diccionario").Protect ("Calidad2020")
+        Sheets("Hoja de inspeccion").Visible = True
+        Sheets("SPC").Visible = True
+        Sheets("PLAN DE ACCION NUEVO").Visible = True
+        Sheets("HOME").Visible = True
+        
+        Sheets("Nuevo analisis").Visible = False
+        Sheets("Usuarios").Visible = False
+        Sheets("Correo").Visible = False
+        Sheets("Nombres").Visible = False
+        Sheets("Analisis").Visible = False
+        Sheets("PLAN DE ACCION").Visible = False
+        
+        ' Application.DisplayFormulaBar = False
+        Application.DisplayStatusBar = False
+        ActiveWindow.DisplayHeadings = False
+        ActiveWindow.DisplayWorkbookTabs = False
+    End If
+    
+    Sheets("Hoja de inspeccion").Activate
+End Sub
