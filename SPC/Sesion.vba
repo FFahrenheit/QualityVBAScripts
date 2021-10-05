@@ -41,11 +41,13 @@ Sub CerrarSesion()
     ' Application.ExecuteExcel4Macro "SHOW.TOOLBAR(""Ribbon"",False)"
     Application.DisplayFormulaBar = False
     Application.DisplayStatusBar = False
+    Exit Sub
 Handler:
     Resume Next
 End Sub
 
 Sub IniciarSesion()
+    On Error GoTo Handler
     Application.ScreenUpdating = False
     Application.DisplayAlerts = False
     Usuarios.Show
@@ -105,5 +107,8 @@ Sub IniciarSesion()
     
     Application.ScreenUpdating = True
     Application.DisplayAlerts = True
+    Exit Sub
+Handler:
+    Resume Next
 End Sub
 

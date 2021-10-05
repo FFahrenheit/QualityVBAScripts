@@ -2,19 +2,27 @@
 '' linear search algorythm
 
 Private Type Lengths
-    Data As Integer
-    Dict As Integer
-    EData As Integer
-    EDict As Integer
+    Data As Integer  'Last row in Data
+    Dict As Integer  'Last row in Dict
+    EData As Integer 'Size of Data
+    EDict As Integer 'Size of Dict
 End Type
 
 Public Sub GetData()
+    Dim Property As String
+    
     Dim Data As Worksheet
     Dim Dict As Worksheet
-    Dim I, J As Integer
+    Dim Insp As Worksheet
+    Dim InspName As String
+    
+    Dim I As Integer
     Dim L As Lengths
+    InspName = "Hoja de inspeccion"
+    
     Set Data = ActiveWorkbook.Worksheets("Data")
     Set Dict = ActiveWorkbook.Worksheets("Diccionario")
+    Set Insp = ActiveWorkbook.Worksheets(InspName)
     
     L = FullDict(Data, Dict)
     
@@ -24,24 +32,52 @@ Public Sub GetData()
         "Diccionario incompleto"
     End If
     
+    C = LastCell(InspName)
+    Success = True
+    
     I = 5
     
     While I <= L.Data
-        Exit Sub
+        Property = Data.Range("A" & I).Value
+        Value = Data.Range("B" & I).Value
+        
+        Destination = SearchValue(Dict, L, Property)
+        If Destination <> 0 Then
+            Insp.Cells(Destination, C) = Value
+        Else
+            Success = False
+        End If
+        I = I + 1
     Wend
+    
+    If Success = True Then
+        MsgBox "Se han importa los datos de forma correcta", _
+        vbOKOnly + vbInformation, "Hoja importada"
+    Else
+        MsgBox "Se han importado parcialmente los datos, llene las celdas faltantes", _
+        vbOKOnly + vbCritical, "Hoja importada"
+    End If
+    
 
 End Sub
 
 Function LastCell(SheetName As String)
+    Dim I As Integer
     Dim WS As Worksheet
     Set WS = ActiveWorkbook.Sheets(SheetName)
     I = 19
     
-    While WS.Cells(14, I) <> "" Or WS.Cells(21, I) <> "" Or WS.Cells(22, I)
+    Do While True
+        If ((WS.Cells(14, I).Value = "-" Or WS.Cells(14, I) = "") And WS.Cells(21, I).Value = "" _
+            And WS.Cells(22, I).Value = "") Or I > 60 Then
+            Exit Do
+        End If
         I = I + 1
-    End
+    Loop
+    
     LastCell = I
-    MsgBox LastCell
+    MsgBox "Last cell = " & LastCell
+    
 End Function
 
 Private Function FullDict(Data As Worksheet, Dict As Worksheet) As Lengths
@@ -67,5 +103,19 @@ Private Function FullDict(Data As Worksheet, Dict As Worksheet) As Lengths
         .EDict = EntriesDict
     End With
     
-    
 End Function
+
+Function SearchValue(Dict As Worksheet, L As Lengths, Property As String)
+    I = 5
+    SearchValue = 0
+    
+    While I <= L.Dict
+        If Dict.Range("B" & I) = Property Then
+            SearchValue = Dict.Range("C" & I)
+            Exit Function
+        End If
+        
+        I = I + 1
+    Wend
+End Function
+
