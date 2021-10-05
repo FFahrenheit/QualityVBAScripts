@@ -35,17 +35,20 @@ Public Sub GetData()
     C = LastCell(InspName)
     Success = True
     
-    I = 5
+    I = 2
     
     While I <= L.Data
         Property = Data.Range("A" & I).Value
         Value = Data.Range("B" & I).Value
         
-        Destination = SearchValue(Dict, L, Property)
-        If Destination <> 0 Then
-            Insp.Cells(Destination, C) = Value
-        Else
-            Success = False
+        If Property <> "" Then
+            Destination = SearchValue(Dict, L, Property)
+            If Destination <> 0 Then
+                Insp.Cells(Destination, C) = Value
+                Insp.Cells(Destination, C).Select
+            Else
+                Success = False
+            End If
         End If
         I = I + 1
     Wend
@@ -69,7 +72,7 @@ Function LastCell(SheetName As String)
     
     Do While True
         If ((WS.Cells(14, I).Value = "-" Or WS.Cells(14, I) = "") And WS.Cells(21, I).Value = "" _
-            And WS.Cells(22, I).Value = "") Or I > 60 Then
+            And WS.Cells(22, I).Value = "") Then
             Exit Do
         End If
         I = I + 1
@@ -106,7 +109,7 @@ Private Function FullDict(Data As Worksheet, Dict As Worksheet) As Lengths
 End Function
 
 Function SearchValue(Dict As Worksheet, L As Lengths, Property As String)
-    I = 5
+    I = 2
     SearchValue = 0
     
     While I <= L.Dict

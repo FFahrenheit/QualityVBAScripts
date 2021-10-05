@@ -27,8 +27,8 @@ Sub ReadData(Filename As String)
     If Exists = False Then
         'No existe, la creamos
         With Workbooks(A)
-            Set ws = .Sheets.Add(After:=.Sheets(.Sheets.Count))
-            ws.Name = B
+            Set WS = .Sheets.Add(After:=.Sheets(.Sheets.Count))
+            WS.Name = B
         End With
     End If
     
@@ -64,19 +64,19 @@ Sub ReadData(Filename As String)
     Origen.Range("B3") = Destino.Range("C7")
     Origen.Range("B3").NumberFormat = "hh:mm"
     
-    i = 10
-    j = 5
+    I = 10
+    J = 5
     
-    While Destino.Range("B" & i) <> ""
-        Cota = Destino.Range("B" & i)
-        Valor = Destino.Range("H" & (i + 2))
-        Origen.Range("A" & j) = Cota
-        Origen.Range("B" & j) = Valor
+    While Destino.Range("B" & I) <> ""
+        Cota = Destino.Range("B" & I)
+        Valor = Destino.Range("H" & (I + 2))
+        Origen.Range("A" & J) = Cota
+        Origen.Range("B" & J) = Valor
         
         'Dict.Range("A" & j) = Cota
         
-        i = i + 4
-        j = j + 1
+        I = I + 4
+        J = J + 1
     Wend
     
     'Close all
@@ -84,6 +84,7 @@ Sub ReadData(Filename As String)
     Application.ScreenUpdating = True
     src.Close (False)
     Set src = Nothing
+    Algorithm.GetData
     MsgBox "Temp ok"
     ' Destino.Visible = False
     Exit Sub
