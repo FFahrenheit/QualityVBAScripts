@@ -27,13 +27,21 @@ Public Sub GetData()
     I = 5
     
     While I <= L.Data
-        
+        Exit Sub
     Wend
 
 End Sub
 
 Function LastCell(SheetName As String)
+    Dim WS As Worksheet
+    Set WS = ActiveWorkbook.Sheets(SheetName)
+    I = 19
     
+    While WS.Cells(14, I) <> "" Or WS.Cells(21, I) <> "" Or WS.Cells(22, I)
+        I = I + 1
+    End
+    LastCell = I
+    MsgBox LastCell
 End Function
 
 Private Function FullDict(Data As Worksheet, Dict As Worksheet) As Lengths
@@ -61,4 +69,3 @@ Private Function FullDict(Data As Worksheet, Dict As Worksheet) As Lengths
     
     
 End Function
-
