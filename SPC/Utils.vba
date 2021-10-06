@@ -56,8 +56,8 @@ Function GetFile() As String
 End Function
 
 Function AreYouSure(Filename As String) As String
-    Msg = "Ha seleccionado el archivo " & Filename _
-        & "\n ¿Está seguro de continuar? (Seleccione No para Cambiar)"
+    Msg = "Ha seleccionado el archivo " & Filename & vbCrLf _
+        & "¿Está seguro de continuar? (Seleccione No para cambiar de archivo)"
     Response = MsgBox(Msg, vbYesNoCancel + vbQuestion, "CONFIRMACION")
     
     If Response = vbYes Then

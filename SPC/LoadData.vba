@@ -11,7 +11,18 @@ Sub LoadData()
     If Response = vbYes Then
         Filename = Utils.GetFile()
         If Filename <> "" Then
+            If ActiveWorkbook.Worksheets("Usuarios").ProtectContents = True Then
+                ActiveWorkbook.Sheets("Data").Unprotect ("Calidad2020")
+                ActiveWorkbook.Sheets("Diccionario").Unprotect ("Calidad2020")
+            End If
+            
+            'Magic
             ReadData (Filename)
+            
+                If ActiveWorkbook.Worksheets("Usuarios").ProtectContents = True Then
+                    ActiveWorkbook.Sheets("Data").Protect ("Calidad2020")
+                    ActiveWorkbook.Sheets("Diccionario").Protect ("Calidad2020")
+                End If
         End If
     End If
 End Sub
@@ -89,5 +100,5 @@ Sub ReadData(Filename As String)
     Exit Sub
 Handler:
     MsgBox "Error: " & Err.Description
-    MsgBox "No se pudieron cargar los datos de la hoja de inspeccion", vbOKOnly + vbCritical, "Error de carga"
+    MsgBox "No se pudieron cargar los datos de la hoja de inspeccion origen", vbOKOnly + vbCritical, "Error de carga de datos"
 End Sub

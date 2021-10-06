@@ -9,6 +9,7 @@ Private Type Lengths
 End Type
 
 Public Sub GetData()
+    On Error GoTo Handler
     Dim Property As String
     
     Dim Data As Worksheet
@@ -23,6 +24,8 @@ Public Sub GetData()
     Set Data = ActiveWorkbook.Worksheets("Data")
     Set Dict = ActiveWorkbook.Worksheets("Diccionario")
     Set Insp = ActiveWorkbook.Worksheets(InspName)
+    
+    Insp.Activate
     
     L = FullDict(Data, Dict)
     
@@ -54,14 +57,15 @@ Public Sub GetData()
     Wend
     
     If Success = True Then
-        MsgBox "Se han importa los datos de forma correcta", _
+        MsgBox "Se han importado los datos de forma correcta", _
         vbOKOnly + vbInformation, "Hoja importada"
     Else
         MsgBox "Se han importado parcialmente los datos, llene las celdas faltantes", _
         vbOKOnly + vbCritical, "Hoja importada"
     End If
-    
-
+    Exit Sub
+Handler:
+    Resume Next
 End Sub
 
 Function LastCell(SheetName As String)
