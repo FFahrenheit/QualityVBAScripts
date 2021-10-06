@@ -45,7 +45,7 @@ Function GetFile() As String
         If .Show = -1 Then
         'ok
             SelectedFile = .SelectedItems(1)
-            GetFile = SelectedFile
+            GetFile = AreYouSure((SelectedFile))
             ' OpenWorkbook (SelectedFile)
         Else
         'cancel
@@ -53,4 +53,19 @@ Function GetFile() As String
         End If
         
     End With
+End Function
+
+Function AreYouSure(Filename As String) As String
+    Msg = "Ha seleccionado el archivo " & Filename _
+        & "\n ¿Está seguro de continuar? (Seleccione No para Cambiar)"
+    Response = MsgBox(Msg, vbYesNoCancel + vbQuestion, "CONFIRMACION")
+    
+    If Response = vbYes Then
+        AreYouSure = Filename
+    ElseIf Response = vbNo Then
+        AreYouSure = GetFile()
+    Else
+        AreYouSure = ""
+    End If
+    
 End Function

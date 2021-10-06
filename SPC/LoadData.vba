@@ -85,7 +85,6 @@ Sub ReadData(Filename As String)
     src.Close (False)
     Set src = Nothing
     Algorithm.GetData
-    MsgBox "Temp ok"
     ' Destino.Visible = False
     Exit Sub
 Handler:
