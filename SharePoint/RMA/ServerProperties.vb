@@ -42,6 +42,10 @@ Sub SetServerProperties()
                 Prop.Value = Range("scrap").Value
             Case "PO_Return"
                 Prop.Value = Range("poreturn").Value
+            Case "Cantidad_Piezas"
+                Prop.Value = Range("quantity").Value
+            Case "Costo_Unitario"
+                Prop.Value = Range("unitPrice").Value
             Case Else
                 'N/A
         End Select

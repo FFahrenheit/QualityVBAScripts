@@ -1,2 +1,2 @@
 # QualityVBAScripts
-Some basic VBA Scripts for Quality optimizatiion
+Some basic VBA Scripts for Quality optimization
