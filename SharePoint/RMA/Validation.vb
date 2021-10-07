@@ -11,7 +11,7 @@ Function Validate() As Boolean
         Content = "Por favor, " & Worksheets("Validacion").Range("B" & I)
         Title = Worksheets("Validacion").Range("C" & I)
         
-        If Value = "" Then
+        If Value = "" Or (Value = "9999" And Reference = "realNumber") Then
             CallNotification Title, Content, Reference
             Exit Function
             'Exit For
