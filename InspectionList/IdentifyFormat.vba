@@ -31,6 +31,7 @@ Function Identify(Filename As String) As String
         Do While Source.Range("A" & I) <> "" And IsNumeric(Source.Range("A" & I)) = True
             I = I + 1
         Loop
+        MsgBox "Registros = " & I - 1
     End If
     
     If I > 3 Then
@@ -44,20 +45,25 @@ Function Identify(Filename As String) As String
     OneMeasure = True
     Count = 0
     
+    MsgBox "Formato A"
+    
     Do While Source.Range("B" & I) <> ""
         J = I + 2
-        Value = Source.Range("G" & I + 2)
         
-        Do While Source.Range("B" & J + 1) <> ""
-            OneMeasure = False
-            If IsNumeric(Source.Range("G" & J + 1)) = False Then    'Formato desconocido
+        Do While Source.Range("G" & J) <> ""
+        
+            If IsNumeric(Source.Range("G" & J)) = False Then    'Formato desconocido
                 GoTo NoResult
             End If
             
             J = J + 1
         Loop
+        
         Count = Count + 1
+        I = J + 1
     Loop
+    
+    MsgBox "Registros = " & Count
     
     If Count > 1 Then
         If OneMeasure = True Then
