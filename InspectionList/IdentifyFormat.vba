@@ -34,7 +34,6 @@ Function Identify(Filename As String) As String
         
         Do While Source.Cells(I, J) <> "" And IsNumeric(Source.Cells(I, J)) = True
             J = J + 1
-            MsgBox Source.Cells(1, J)
         Loop
         
         J = J - 1
@@ -85,10 +84,12 @@ Function Identify(Filename As String) As String
             Identify = "A1"
         ElseIf MedicionesMax = 2 Then
             Identify = "A2"
-        End If
         ElseIf MedicionesMax > 2 Then
             Identify = "A3"
+        End If
+        
         GoTo Return0
+        
     Else
         GoTo NoResult
     End If
@@ -103,7 +104,10 @@ Return0:
     Set src = Nothing
     Exit Function
 ErrHandler:
+    Application.EnableEvents = True
+    Application.ScreenUpdating = True
+    'src.Close (False)
+    'Set src = Nothing
     MsgBox "Error: " & Err.Description
     MsgBox "No se pudieron cargar los datos de la hoja de inspeccion", vbOKOnly + vbCritical, "Error de carga"
-    GoTo Return0
 End Function
