@@ -46,6 +46,22 @@ Sub SetServerProperties()
                 Prop.Value = Range("quantity").Value
             Case "Costo_Unitario"
                 Prop.Value = Range("unitPrice").Value
+            Case "Material_Recibido":
+                Prop.Value = Range("materialReception").Value
+            Case "Fecha_Recepcion":
+                Prop.Value = Range("receptionDate").Value
+            Case "Orden_Trabajo":
+                Prop.Value = Range("internalOrder").Value
+            Case "Cantidad_Scrap":
+                Prop.Value = Range("scrapQuantity").Value
+            Case "Costo_Calidad":
+                Prop.Value = Range("qualityCost").Value
+            Case "PO_Retorno":
+                Prop.Value = Range("returnPO").Value
+            Case "Proceso_Finalizado":
+                Prop.Value = Range("finishedProcess").Value
+            Case "Nota_Credito":
+                Prop.Value = Range("creditNote").Value
             Case Else
                 'N/A
         End Select
